@@ -203,3 +203,117 @@ if __name__ == "__main__":
 
 파이썬 코드를 n=0..7에 대해 직접 실행해 `1, 1, 2, 3, 5, 8, 13, 21`을 확인했다
 (피보나치 수열과 일치, n=4일 때 문제 예시와 동일하게 5가 나옴).
+
+---
+
+## 문제 3. Merge Intervals
+
+### 문제 요약
+
+정렬되지 않은 구간 리스트 `[start, end]`가 주어진다. 겹치는 구간들을 전부 합쳐서,
+겹치지 않는 구간들의 리스트를 **시작 시각 기준 오름차순**으로 반환한다.
+
+예시: `[[1,3],[2,6],[8,10],[15,18]]` → `[1,3]`과 `[2,6]`이 겹치므로 `[1,6]`으로 합쳐져
+`[[1,6],[8,10],[15,18]]`을 반환.
+
+제약: 각 구간은 `start <= end`. 빈 리스트가 들어오면 빈 리스트를 반환.
+목표 복잡도: 정렬 후 한 번의 순회로 **O(n log n)**.
+
+### 접근 방식
+
+1. **시작 시각 기준으로 정렬**한다. 정렬해두면 "지금 보고 있는 구간이 이전에 합쳐둔
+   구간과 겹치는지"만 확인하면 되므로, 뒤쪽에 있던 구간이 앞쪽 구간과 겹치는지
+   따로 되짚어볼 필요가 없어진다 (정렬이 문제를 1차원 순회로 바꿔준다).
+2. 결과 리스트를 유지하면서, 정렬된 구간을 하나씩 본다:
+   - 결과 리스트의 **마지막 구간의 end**보다 현재 구간의 **start가 작거나 같으면**
+     겹친다(또는 맞닿는다, 예: `[1,4]`와 `[4,5]`) → 마지막 구간의 end를
+     `max(마지막.end, 현재.end)`로 갱신 (현재 구간이 마지막 구간에 완전히 포함되는
+     경우, 예: `[1,4]`와 `[2,3]`도 이 max로 자연스럽게 처리됨).
+   - 겹치지 않으면 현재 구간을 새 구간으로 결과 리스트에 추가한다.
+3. 정렬이 끝난 상태이므로 결과는 이미 시작 시각 기준 오름차순이다.
+
+버킷 정렬 등으로 O(n)에 더 빠르게 하는 방법도 있지만, 구간 값의 범위에 제약이 없는
+일반적인 경우 비교 기반 정렬의 하한이 O(n log n)이라 이게 최선의 일반해다.
+
+### 시간/공간 복잡도
+
+- **시간: O(n log n)** — 정렬이 O(n log n), 이후 단일 순회가 O(n)이므로 정렬이 지배.
+- **공간: O(n)** — 결과 리스트(최악의 경우 겹치는 구간이 없으면 입력과 같은 크기)
+  + 정렬 자체가 쓰는 부가 공간(Timsort/Java Collections.sort 기준 O(n) 또는 O(log n),
+  구현체에 따라 다름).
+
+### 파이썬 풀이
+
+```python
+from typing import List
+
+
+def merge_intervals(intervals: List[List[int]]) -> List[List[int]]:
+    if not intervals:
+        return []
+
+    intervals_sorted = sorted(intervals, key=lambda iv: iv[0])  # O(n log n)
+
+    merged = [intervals_sorted[0][:]]
+    for start, end in intervals_sorted[1:]:                     # O(n)
+        last = merged[-1]
+        if start <= last[1]:          # 겹치거나 맞닿음
+            last[1] = max(last[1], end)
+        else:
+            merged.append([start, end])
+    return merged
+
+
+if __name__ == "__main__":
+    print(merge_intervals([[1, 3], [2, 6], [8, 10], [15, 18]]))
+    # [[1, 6], [8, 10], [15, 18]]
+```
+
+### 자바 풀이
+
+```java
+import java.util.*;
+
+public class MergeIntervals {
+
+    public static int[][] mergeIntervals(int[][] intervals) {
+        if (intervals.length == 0) {
+            return new int[0][];
+        }
+
+        int[][] sorted = intervals.clone();
+        Arrays.sort(sorted, (a, b) -> Integer.compare(a[0], b[0])); // O(n log n)
+
+        List<int[]> merged = new ArrayList<>();
+        merged.add(sorted[0].clone());
+
+        for (int i = 1; i < sorted.length; i++) {                  // O(n)
+            int[] last = merged.get(merged.size() - 1);
+            int start = sorted[i][0];
+            int end = sorted[i][1];
+            if (start <= last[1]) {
+                last[1] = Math.max(last[1], end);
+            } else {
+                merged.add(sorted[i].clone());
+            }
+        }
+
+        return merged.toArray(new int[0][]);
+    }
+
+    public static void main(String[] args) {
+        int[][] result = mergeIntervals(new int[][]{{1, 3}, {2, 6}, {8, 10}, {15, 18}});
+        for (int[] interval : result) {
+            System.out.println(Arrays.toString(interval));
+        }
+        // [1, 6]
+        // [8, 10]
+        // [15, 18]
+    }
+}
+```
+
+### 검증
+
+문제에 포함된 `run_tests()` 하네스(테스트 7개: 부분 겹침, 맞닿음, 완전 포함, 겹침 없음,
+빈 리스트, 단일 구간, 정렬 안 된 입력)로 파이썬 구현을 실행해 **7/7 전부 통과**를 확인했다.
