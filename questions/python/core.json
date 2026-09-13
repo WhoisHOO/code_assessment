@@ -1,0 +1,158 @@
+[
+  {
+    "id": "py-001",
+    "language": "python",
+    "topic": "functions",
+    "difficulty": "medium",
+    "question": "What does this program print?",
+    "code": "def append_item(x, acc=[]):\n    acc.append(x)\n    return acc\n\nprint(append_item(1))\nprint(append_item(2))",
+    "choices": [
+      "[1] then [1, 2]",
+      "[1] then [2]",
+      "[1] then [1]",
+      "It raises a TypeError"
+    ],
+    "answer_index": 0,
+    "explanation": "Default argument values are evaluated once, at function definition time. Both calls share the same list object, so the second call appends to the list that already contains 1."
+  },
+  {
+    "id": "py-002",
+    "language": "python",
+    "topic": "data-structures",
+    "difficulty": "easy",
+    "question": "What is the average-case time complexity of the membership test `x in s` when `s` is a set?",
+    "choices": [
+      "O(1)",
+      "O(log n)",
+      "O(n)",
+      "O(n log n)"
+    ],
+    "answer_index": 0,
+    "explanation": "Sets are hash tables, so membership tests are O(1) on average. For a list, the same test is O(n) because it scans elements one by one."
+  },
+  {
+    "id": "py-003",
+    "language": "python",
+    "topic": "strings",
+    "difficulty": "easy",
+    "question": "What does this expression evaluate to?",
+    "code": "\"assessment\"[2:5]",
+    "choices": [
+      "'sse'",
+      "'ses'",
+      "'sess'",
+      "'esse'"
+    ],
+    "answer_index": 1,
+    "explanation": "Slicing is start-inclusive and end-exclusive, so [2:5] takes the characters at indexes 2, 3, and 4: 's', 'e', 's'."
+  },
+  {
+    "id": "py-004",
+    "language": "python",
+    "topic": "data-structures",
+    "difficulty": "easy",
+    "question": "What happens when this code runs?",
+    "code": "t = (1, 2, 3)\nt[0] = 99",
+    "choices": [
+      "It raises a TypeError",
+      "t becomes (99, 2, 3)",
+      "It raises an IndexError",
+      "A new tuple is created and t is rebound to it"
+    ],
+    "answer_index": 0,
+    "explanation": "Tuples are immutable: item assignment raises TypeError. To get (99, 2, 3) you would have to build a new tuple, e.g. (99,) + t[1:]."
+  },
+  {
+    "id": "py-005",
+    "language": "python",
+    "topic": "data-structures",
+    "difficulty": "medium",
+    "question": "In Python 3.7+, in what order does iterating over a dict yield its keys?",
+    "choices": [
+      "Insertion order",
+      "Ascending key order",
+      "Hash order, which can change between runs",
+      "The order is unspecified"
+    ],
+    "answer_index": 0,
+    "explanation": "Since Python 3.7, dicts preserve insertion order as a language guarantee (it was an implementation detail in CPython 3.6)."
+  },
+  {
+    "id": "py-006",
+    "language": "python",
+    "topic": "algorithms",
+    "difficulty": "medium",
+    "question": "Which statement about Python's built-in `sorted()` is true?",
+    "choices": [
+      "It is stable and runs in O(n log n) worst case",
+      "It is stable and runs in O(n^2) worst case",
+      "It is unstable and runs in O(n log n) worst case",
+      "It sorts in place and returns None"
+    ],
+    "answer_index": 0,
+    "explanation": "sorted() uses Timsort: a stable sort with O(n log n) worst-case time. It returns a new list; list.sort() is the in-place variant that returns None."
+  },
+  {
+    "id": "py-007",
+    "language": "python",
+    "topic": "object-model",
+    "difficulty": "easy",
+    "question": "What does this program print?",
+    "code": "a = [1, 2]\nb = [1, 2]\nprint(a == b, a is b)",
+    "choices": [
+      "True False",
+      "True True",
+      "False False",
+      "False True"
+    ],
+    "answer_index": 0,
+    "explanation": "`==` compares values, so two equal lists compare True. `is` compares identity, and a and b are two distinct list objects."
+  },
+  {
+    "id": "py-008",
+    "language": "python",
+    "topic": "comprehensions",
+    "difficulty": "easy",
+    "question": "What does this expression evaluate to?",
+    "code": "[i * i for i in range(4) if i % 2 == 0]",
+    "choices": [
+      "[0, 4]",
+      "[0, 1, 4, 9]",
+      "[4, 16]",
+      "[1, 9]"
+    ],
+    "answer_index": 0,
+    "explanation": "range(4) yields 0, 1, 2, 3; the filter keeps the even values 0 and 2, and squaring them gives 0 and 4."
+  },
+  {
+    "id": "py-009",
+    "language": "python",
+    "topic": "object-model",
+    "difficulty": "hard",
+    "question": "What does this program print?",
+    "code": "grid = [[0] * 2] * 3\ngrid[0][0] = 1\nprint(grid)",
+    "choices": [
+      "[[1, 0], [1, 0], [1, 0]]",
+      "[[1, 0], [0, 0], [0, 0]]",
+      "[[1, 1], [1, 1], [1, 1]]",
+      "It raises an IndexError"
+    ],
+    "answer_index": 0,
+    "explanation": "Multiplying a list of lists copies references, not the inner lists. All three rows are the same list object, so mutating one row mutates them all. Use a comprehension like [[0] * 2 for _ in range(3)] instead."
+  },
+  {
+    "id": "py-010",
+    "language": "python",
+    "topic": "strings",
+    "difficulty": "medium",
+    "question": "What is the idiomatic and efficient way to concatenate a large list of strings `parts` in Python?",
+    "choices": [
+      "''.join(parts)",
+      "result = ''; then result += p for each p in a loop",
+      "sum(parts, '')",
+      "str(parts)"
+    ],
+    "answer_index": 0,
+    "explanation": "Strings are immutable, so repeated += can copy the accumulated string each time (O(n^2) worst case). ''.join(parts) allocates once and runs in O(n). sum() explicitly rejects strings for this reason."
+  }
+]

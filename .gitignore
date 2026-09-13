@@ -1,0 +1,14 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Per-user quiz history (missed-question log)
+results/
+
+# Editors / OS
+.vscode/
+.idea/
+Thumbs.db
+.DS_Store

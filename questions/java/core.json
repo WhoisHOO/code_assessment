@@ -1,0 +1,158 @@
+[
+  {
+    "id": "java-001",
+    "language": "java",
+    "topic": "strings",
+    "difficulty": "easy",
+    "question": "What does this program print?",
+    "code": "String a = new String(\"hi\");\nString b = new String(\"hi\");\nSystem.out.println(a == b);\nSystem.out.println(a.equals(b));",
+    "choices": [
+      "false then true",
+      "true then true",
+      "false then false",
+      "true then false"
+    ],
+    "answer_index": 0,
+    "explanation": "`==` compares object references, and `new String(...)` always creates a distinct object, so a == b is false. `.equals()` compares character content, so it is true."
+  },
+  {
+    "id": "java-002",
+    "language": "java",
+    "topic": "object-model",
+    "difficulty": "hard",
+    "question": "What does this program print?",
+    "code": "Integer a = 127, b = 127;\nInteger c = 128, d = 128;\nSystem.out.println((a == b) + \" \" + (c == d));",
+    "choices": [
+      "true false",
+      "true true",
+      "false false",
+      "false true"
+    ],
+    "answer_index": 0,
+    "explanation": "Autoboxing uses Integer.valueOf(), which caches values from -128 to 127. 127 hits the cache (same object), while 128 creates two distinct objects, so reference comparison fails. Always compare boxed values with .equals()."
+  },
+  {
+    "id": "java-003",
+    "language": "java",
+    "topic": "collections",
+    "difficulty": "easy",
+    "question": "What is the average-case time complexity of HashMap.get() and HashMap.put()?",
+    "choices": [
+      "O(1)",
+      "O(log n)",
+      "O(n)",
+      "O(n log n)"
+    ],
+    "answer_index": 0,
+    "explanation": "HashMap is a hash table, so get and put are O(1) on average. Worst case is O(log n) per bucket in modern Java, since heavily-collided buckets become red-black trees."
+  },
+  {
+    "id": "java-004",
+    "language": "java",
+    "topic": "strings",
+    "difficulty": "easy",
+    "question": "You need to build a long string by appending inside a loop. Which approach is preferred, and why?",
+    "choices": [
+      "StringBuilder, because String is immutable and += copies on every iteration",
+      "String +=, because the compiler always optimizes it into one buffer",
+      "String.concat(), because it mutates the string in place",
+      "char[] only, because StringBuilder is deprecated"
+    ],
+    "answer_index": 0,
+    "explanation": "Java Strings are immutable; += in a loop creates a new String (and copies the accumulated content) on each iteration, which is O(n^2) overall. StringBuilder appends into a growable buffer in amortized O(1) per append."
+  },
+  {
+    "id": "java-005",
+    "language": "java",
+    "topic": "primitives",
+    "difficulty": "medium",
+    "question": "What does this program print?",
+    "code": "System.out.println(Integer.MAX_VALUE + 1);",
+    "choices": [
+      "-2147483648",
+      "2147483648",
+      "0",
+      "It throws an ArithmeticException"
+    ],
+    "answer_index": 0,
+    "explanation": "Java int arithmetic silently wraps around on overflow (two's complement), so MAX_VALUE + 1 wraps to MIN_VALUE. Use Math.addExact() if you want an exception instead."
+  },
+  {
+    "id": "java-006",
+    "language": "java",
+    "topic": "collections",
+    "difficulty": "medium",
+    "question": "Which statement about ArrayList and LinkedList index access is true?",
+    "choices": [
+      "ArrayList.get(i) is O(1); LinkedList.get(i) is O(n)",
+      "Both are O(1)",
+      "ArrayList.get(i) is O(n); LinkedList.get(i) is O(1)",
+      "Both are O(log n)"
+    ],
+    "answer_index": 0,
+    "explanation": "ArrayList is backed by an array, so index access is constant time. LinkedList must walk node-by-node from the nearest end, which is linear time."
+  },
+  {
+    "id": "java-007",
+    "language": "java",
+    "topic": "object-model",
+    "difficulty": "medium",
+    "question": "What happens when this code runs?",
+    "code": "Integer x = null;\nint y = x;\nSystem.out.println(y);",
+    "choices": [
+      "It throws a NullPointerException at runtime",
+      "It prints 0",
+      "It prints null",
+      "It fails to compile"
+    ],
+    "answer_index": 0,
+    "explanation": "Unboxing calls x.intValue() under the hood, and calling a method on null throws NullPointerException. The code compiles fine, which is what makes this bug easy to miss."
+  },
+  {
+    "id": "java-008",
+    "language": "java",
+    "topic": "primitives",
+    "difficulty": "easy",
+    "question": "What does this program print?",
+    "code": "System.out.println(7 / 2);\nSystem.out.println(7 % 2);",
+    "choices": [
+      "3 then 1",
+      "3.5 then 1",
+      "4 then 1",
+      "3 then 0.5"
+    ],
+    "answer_index": 0,
+    "explanation": "With two int operands, / performs integer division that truncates toward zero (7 / 2 = 3), and % gives the remainder (1). Use 7 / 2.0 to get 3.5."
+  },
+  {
+    "id": "java-009",
+    "language": "java",
+    "topic": "collections",
+    "difficulty": "medium",
+    "question": "Which Map implementation keeps its keys in sorted order, and at what cost per get/put?",
+    "choices": [
+      "TreeMap, O(log n)",
+      "HashMap, O(1)",
+      "LinkedHashMap, O(1)",
+      "TreeMap, O(1)"
+    ],
+    "answer_index": 0,
+    "explanation": "TreeMap is a red-black tree: keys stay sorted and operations are O(log n). LinkedHashMap preserves insertion order (not sorted order), and HashMap has no ordering at all."
+  },
+  {
+    "id": "java-010",
+    "language": "java",
+    "topic": "primitives",
+    "difficulty": "easy",
+    "question": "What does this program print?",
+    "code": "int[] a = new int[2];\nString[] s = new String[1];\nSystem.out.println(a[0] + \", \" + s[0]);",
+    "choices": [
+      "0, null",
+      "null, null",
+      "0, \"\"",
+      "It throws a NullPointerException"
+    ],
+    "answer_index": 0,
+    "explanation": "Array elements are initialized to their type's default value: 0 for numeric primitives, null for object references. Printing a null reference via string concatenation prints the text \"null\" without throwing."
+  }
+]
