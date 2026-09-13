@@ -14,8 +14,8 @@
   Daily(Leitner SRS 복습 큐, 신규 하루 10개 캡) / Flashcards(트리거→패턴) /
   Quiz(MCQ) / Problems(타이머 문제풀이 + 오답 4분류 포스트모템) / Stats.
 - **Quiz CLI** (`quiz.cmd` → `python -m quiz`): MCQ 세션, `--review`.
-- 콘텐츠: MCQ 20개(python/java 각 10), 플래시카드 15개(cards/patterns.json),
-  장문 문제 4개(problems/ 아래 카테고리별).
+- 콘텐츠: MCQ 20개(python/java 각 10), 플래시카드 18개(cards/patterns.json),
+  장문 문제 7개(problems/ 아래 카테고리별).
 - 테스트 26개 통과, 서버 API 스모크 테스트 완료.
 
 ## 문제 재작성 규칙 (중요 — 사용자가 데이터 줄 때)
@@ -36,13 +36,17 @@
 이관 이력: 구 `coding-problems.md`의 3문제를 재작성해 problems/로 이동
 (Bob's String Encoding → shifted-frequency-report, Climbing Stairs →
 corridor-hops, Merge Intervals → booking-consolidation). 원문은 git 히스토리.
-사용자 제공 1호: Group Anagrams → rearranged-aliases.
+사용자 제공분: Group Anagrams → rearranged-aliases, Alien Dictionary →
+conlang-alphabet, Median of Two Sorted Arrays → median-two-sorted-feeds,
+Trapping Rain Water II → terrain-rainwater. **중복 주의**: 같은 문제가 다시
+들어오면 새 파일을 만들지 말고 기존 md와 대조 후 필요한 부분만 갱신.
 
 ## 카테고리 (problems/ 폴더)
 
-arrays-intervals, dynamic-programming, graphs-trees, strings-hashing.
-필요시 추가 후보: two-pointers-sliding-window, heaps-stacks,
-implementation-simulation, math-bits.
+arrays-intervals, binary-search, dynamic-programming, graphs-trees,
+heaps-stacks, strings-hashing.
+필요시 추가 후보: two-pointers-sliding-window, implementation-simulation,
+math-bits.
 
 ## 설계 결정
 

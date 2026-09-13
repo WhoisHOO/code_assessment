@@ -70,6 +70,20 @@
     "notes": "Prune early when a partial choice already violates constraints. Output size is often exponential by nature."
   },
   {
+    "id": "card-median-partition",
+    "category": "search",
+    "trigger": "Median or k-th element of TWO sorted arrays in log time, without merging",
+    "pattern": "Binary search the partition of the SMALLER array; valid when left-max <= right-min across both",
+    "notes": "Partition sizes: i + j = (m+n+1)/2. Use +/-inf sentinels for empty sides - boundary handling is where this problem is usually botched. O(log min(m, n))."
+  },
+  {
+    "id": "card-heap-flood-fill",
+    "category": "data-structures",
+    "trigger": "2D grid where water/level is bounded by the LOWEST escape path (trapping rain water II, swim in rising water)",
+    "pattern": "Min-heap flood fill from the boundary: always pop the lowest wall, expand inward (Dijkstra-style)",
+    "notes": "Push neighbors as max(current level, neighbor height) - a filled cell becomes a wall at the water level. The popped height is final because nothing lower is left in the heap. O(mn log(mn))."
+  },
+  {
     "id": "card-binary-search-answer",
     "category": "search",
     "trigger": "Minimize/maximize a value where 'is x feasible?' is monotonic (capacity, speed, split sizes)",
