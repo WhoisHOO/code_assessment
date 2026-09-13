@@ -1,0 +1,107 @@
+[
+  {
+    "id": "card-two-pointers",
+    "category": "arrays",
+    "trigger": "Find a pair in a SORTED array that sums to a target",
+    "pattern": "Two pointers from both ends",
+    "notes": "Move left up if sum is too small, right down if too big. O(n). If the array is unsorted, use the hashmap-complement pattern instead."
+  },
+  {
+    "id": "card-hashmap-complement",
+    "category": "arrays",
+    "trigger": "Find a pair that sums to a target in an UNSORTED array",
+    "pattern": "One pass with a hashmap of seen values (look up target - x)",
+    "notes": "O(n) time, O(n) space. Beats sorting (O(n log n)) when indexes must be preserved."
+  },
+  {
+    "id": "card-sliding-window",
+    "category": "arrays",
+    "trigger": "Longest/shortest CONTIGUOUS subarray or substring satisfying a constraint",
+    "pattern": "Sliding window: grow the right edge, shrink the left while the constraint is violated",
+    "notes": "O(n) because each index enters and leaves the window once. Fixed-size variants: maintain a running sum/count."
+  },
+  {
+    "id": "card-prefix-sum",
+    "category": "arrays",
+    "trigger": "Many range-sum queries, or count subarrays with sum exactly k",
+    "pattern": "Prefix sums; for count-with-sum-k, a hashmap of prefix-sum frequencies",
+    "notes": "sum(i..j) = prefix[j+1] - prefix[i]. The hashmap trick turns O(n^2) into O(n)."
+  },
+  {
+    "id": "card-sort-sweep-intervals",
+    "category": "arrays",
+    "trigger": "Overlapping intervals: merge them, count rooms, or insert one",
+    "pattern": "Sort by start, then a single sweep comparing against the last kept interval",
+    "notes": "O(n log n) from the sort. Overlap test after sorting: current.start <= last.end."
+  },
+  {
+    "id": "card-heap-topk",
+    "category": "data-structures",
+    "trigger": "k largest / k smallest / k most frequent elements",
+    "pattern": "Keep a heap of size k",
+    "notes": "O(n log k), better than full sort when k << n. Python: heapq.nlargest / a min-heap of size k. Java: PriorityQueue."
+  },
+  {
+    "id": "card-monotonic-stack",
+    "category": "data-structures",
+    "trigger": "Next greater element, daily temperatures, largest rectangle in histogram",
+    "pattern": "Monotonic stack: push indexes, pop while the invariant would break",
+    "notes": "Each index is pushed and popped at most once, so O(n) despite the nested loop."
+  },
+  {
+    "id": "card-string-frequency",
+    "category": "strings",
+    "trigger": "Anagram checks, grouping by letters, character-count comparisons",
+    "pattern": "Frequency count (hashmap or 26-slot array) used as a canonical key",
+    "notes": "Sorting each string also works (O(m log m) per string) but counting is O(m)."
+  },
+  {
+    "id": "card-bfs-shortest",
+    "category": "graphs",
+    "trigger": "Shortest path / minimum steps in an UNWEIGHTED graph or grid",
+    "pattern": "BFS with a visited set; the level at which a node is reached is its distance",
+    "notes": "Use a deque. DFS does NOT give shortest paths. Weighted edges need Dijkstra instead."
+  },
+  {
+    "id": "card-dfs-backtracking",
+    "category": "graphs",
+    "trigger": "Enumerate ALL combinations, permutations, subsets, or paths",
+    "pattern": "DFS backtracking: choose, recurse, undo the choice",
+    "notes": "Prune early when a partial choice already violates constraints. Output size is often exponential by nature."
+  },
+  {
+    "id": "card-binary-search-answer",
+    "category": "search",
+    "trigger": "Minimize/maximize a value where 'is x feasible?' is monotonic (capacity, speed, split sizes)",
+    "pattern": "Binary search on the answer with a greedy feasibility check",
+    "notes": "O(n log range). The giveaway phrase: 'smallest x such that ...' / 'largest x such that ...'."
+  },
+  {
+    "id": "card-1d-dp",
+    "category": "dp",
+    "trigger": "Count ways / min cost to reach step n when each move comes from a few previous steps",
+    "pattern": "1D DP: dp[i] from dp[i-1], dp[i-2], ...; often just two rolling variables",
+    "notes": "Climbing stairs, house robber, min cost climbing. Identify base cases first, then the recurrence."
+  },
+  {
+    "id": "card-union-find",
+    "category": "graphs",
+    "trigger": "Merge groups dynamically / count connected components / detect a cycle while adding edges",
+    "pattern": "Union-Find (disjoint set) with path compression",
+    "notes": "Near O(1) amortized per operation. BFS/DFS also counts components when the graph is static."
+  },
+  {
+    "id": "card-gca-time-strategy",
+    "category": "strategy",
+    "trigger": "70-minute, 4-problem assessment: how do you allocate time?",
+    "pattern": "Bank Q1-Q3 first; on Q4 submit a brute force for partial credit before optimizing",
+    "notes": "Target: Q1+Q2 in ~20 min. Never sit 20+ minutes on one problem with nothing submitted. Re-read the statement before coding Q3."
+  },
+  {
+    "id": "card-spec-reading",
+    "category": "strategy",
+    "trigger": "Long implementation-heavy statement (Q3 type): how do you avoid misreading?",
+    "pattern": "List every rule/edge case as a checklist BEFORE coding; re-check the checklist before submitting",
+    "notes": "Most Q3 failures are misread conditions, not algorithm gaps. Highlight numbers, ordering rules, and tie-breaking clauses."
+  }
+]

@@ -1,14 +1,41 @@
 # code_assessment
 
-Random-quiz CLI for practicing big-tech style general coding assessments.
-Covers **Python** and **Java**. Multiple-choice questions with shuffled
-choices, instant feedback, explanations, and a missed-question review mode.
+Practice toolkit for big-tech style general coding assessments (CodeSignal
+GCA and similar). Covers **Python** and **Java**. Pure Python standard
+library — no dependencies to install. Requires Python 3.10+.
 
-Pure Python standard library — no dependencies to install.
+Two ways to practice:
 
-## Quick start
+- **Study UI** (`study.cmd`): a local web app with a Quizlet-style daily
+  routine — spaced-repetition (Leitner) review queue, trigger→pattern
+  flashcards, multiple-choice quizzes, timed long-form problems with a
+  post-mortem log (misread / unknown pattern / slow recall / implementation
+  bug), and per-category stats.
+- **Quiz CLI** (`quiz.cmd`): quick multiple-choice sessions in the terminal.
 
-Requires Python 3.10+.
+## Study UI
+
+```
+study.cmd                    # starts http://127.0.0.1:8765/ and opens a browser
+python -m quiz.server        # any OS; --port N, --no-browser
+```
+
+Tabs:
+
+- **Daily** — everything due today plus up to 10 new items. Wrong answers
+  drop back to box 1 and reappear; correct answers climb boxes with growing
+  intervals (1/2/4/8/16 days).
+- **Flashcards** — trigger→pattern cards ("sorted array, pair sum" → "two
+  pointers"), browsable by category.
+- **Quiz** — on-demand multiple-choice sessions; results feed the same boxes.
+- **Problems** — long-form problems by category: read the statement, run the
+  timer, reveal the solution, then log the outcome and the *cause* of any
+  failure. The cause log tells you what to train.
+- **Stats** — box distribution, accuracy per category, post-mortem causes.
+
+Study state lives in `results/study_state.json` (gitignored, per-machine).
+
+## Quiz CLI
 
 ```
 quiz.cmd                 # Windows: 10 random questions from both languages
@@ -34,18 +61,38 @@ and are cleared one by one as you answer them correctly in `--review` runs.
 ## Project layout
 
 ```
-quiz/               CLI package (stdlib only)
-  __main__.py       argparse entry point (python -m quiz)
+quiz/               package (stdlib only)
+  __main__.py       quiz CLI entry point (python -m quiz)
   loader.py         loads/validates JSON question banks
   engine.py         selection, choice shuffling, session loop, scoring
-  history.py        missed-question log for --review
+  history.py        missed-question log for the CLI --review
+  server.py         study UI server (python -m quiz.server)
+  srs.py            Leitner spaced-repetition state
+  problems.py       loads problems/<category>/*.md
+  cards.py          loads cards/*.json flashcards
+ui/                 study UI single-page app (vanilla HTML/CSS/JS)
 questions/
-  python/*.json     Python question banks
-  java/*.json       Java question banks
+  python/*.json     Python MCQ banks
+  java/*.json       Java MCQ banks
+cards/*.json        trigger→pattern flashcards
+problems/
+  _TEMPLATE.md      problem format + rewrite rules
+  <category>/*.md   long-form timed problems (statement + solutions)
 tests/              unittest suite
-quiz.cmd            Windows launcher
-coding-problems.md  worked long-form problems (separate from the quiz tool)
+quiz.cmd            quiz CLI launcher (Windows)
+study.cmd           study UI launcher (Windows)
 ```
+
+## Adding problems
+
+Long-form problems live one per file in `problems/<category>/<id>.md`; the
+folder name is the category. Copy `problems/_TEMPLATE.md` and follow the
+rules embedded in it — most importantly: problems practiced on other
+platforms must be **rewritten** (new story, names, values, and recomputed
+examples), never pasted verbatim, and every example must be verified by
+actually running the solution code. Everything above the `## Approach`
+heading is shown while the timer runs; everything below appears after
+"Reveal solution".
 
 ## Adding questions
 
