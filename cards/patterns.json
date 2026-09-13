@@ -52,8 +52,8 @@
     "id": "card-string-frequency",
     "category": "strings",
     "trigger": "Anagram checks, grouping by letters, character-count comparisons",
-    "pattern": "Frequency count (hashmap or 26-slot array) used as a canonical key",
-    "notes": "Sorting each string also works (O(m log m) per string) but counting is O(m)."
+    "pattern": "Canonical key in a hashmap: sorted string (safe default) or 26-slot count array (lowercase-only optimization)",
+    "notes": "The 26-array is O(m) vs O(m log m), but ord(c)-ord('a') throws on ANY non-lowercase char - a hidden test with 'A' or ' ' crashes it. Under assessment conditions, the sorted-string key wins unless the constraint guarantees a-z."
   },
   {
     "id": "card-bfs-shortest",
