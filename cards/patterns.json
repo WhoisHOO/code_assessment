@@ -77,6 +77,13 @@
     "notes": "Partition sizes: i + j = (m+n+1)/2. Use +/-inf sentinels for empty sides - boundary handling is where this problem is usually botched. O(log min(m, n))."
   },
   {
+    "id": "card-lru-design",
+    "category": "data-structures",
+    "trigger": "Need O(1) lookup AND O(1) ordering update at once (LRU cache, recently-used tracking, O(1) insert/delete/getRandom)",
+    "pattern": "Combine two structures: hashmap for lookup + doubly linked list (or array) for order - the map stores pointers into the ordered structure",
+    "notes": "LRU: map key->node, DLL with dummy head/tail; store the KEY inside the node so eviction can delete from the map. Shortcuts: Python OrderedDict.move_to_end, Java access-order LinkedHashMap."
+  },
+  {
     "id": "card-heap-flood-fill",
     "category": "data-structures",
     "trigger": "2D grid where water/level is bounded by the LOWEST escape path (trapping rain water II, swim in rising water)",

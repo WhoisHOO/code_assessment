@@ -14,8 +14,8 @@
   Daily(Leitner SRS 복습 큐, 신규 하루 10개 캡) / Flashcards(트리거→패턴) /
   Quiz(MCQ) / Problems(타이머 문제풀이 + 오답 4분류 포스트모템) / Stats.
 - **Quiz CLI** (`quiz.cmd` → `python -m quiz`): MCQ 세션, `--review`.
-- 콘텐츠: MCQ 20개(python/java 각 10), 플래시카드 18개(cards/patterns.json),
-  장문 문제 8개(problems/ 아래 카테고리별).
+- 콘텐츠: MCQ 20개(python/java 각 10), 플래시카드 19개(cards/patterns.json),
+  장문 문제 9개(problems/ 아래 카테고리별).
 - 테스트 26개 통과, 서버 API 스모크 테스트 완료.
 
 ## 문제 재작성 규칙 (중요 — 사용자가 데이터 줄 때)
@@ -39,12 +39,13 @@ corridor-hops, Merge Intervals → booking-consolidation). 원문은 git 히스�
 사용자 제공분: Group Anagrams → rearranged-aliases, Alien Dictionary →
 conlang-alphabet, Median of Two Sorted Arrays → median-two-sorted-feeds,
 Trapping Rain Water II → terrain-rainwater, Course Schedule →
-task-dependency-check. **중복 주의**: 같은 문제가 다시 들어오면 새 파일을
-만들지 말고 기존 md와 대조 후 필요한 부분만 갱신.
+task-dependency-check, LRU Cache → lru-session-cache. **중복 주의**: 같은
+문제가 다시 들어오면 새 파일을 만들지 말고 기존 md와 대조 후 필요한 부분만
+갱신.
 
 ## 카테고리 (problems/ 폴더)
 
-arrays-intervals, binary-search, dynamic-programming, graphs-trees,
+arrays-intervals, binary-search, design, dynamic-programming, graphs-trees,
 heaps-stacks, strings-hashing.
 필요시 추가 후보: two-pointers-sliding-window, implementation-simulation,
 math-bits.
