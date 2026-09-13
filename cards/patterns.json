@@ -14,6 +14,13 @@
     "notes": "O(n) time, O(n) space. Beats sorting (O(n log n)) when indexes must be preserved."
   },
   {
+    "id": "card-two-ends-maxima",
+    "category": "arrays",
+    "trigger": "Each position's answer depends on min(best wall/height to its LEFT, best to its RIGHT) - trapping rain water, container with most water",
+    "pattern": "Two pointers from both ends with running left_max/right_max; the side with the smaller current value is safe to finalize and advance",
+    "notes": "Why it's safe: the other side just proved it holds something >= this value, so min() is decided by this side alone. O(n)/O(1), replaces the prefix/suffix-max arrays. Breaks in 2D grids (water leaks sideways) - there it becomes min-heap flood fill."
+  },
+  {
     "id": "card-sliding-window",
     "category": "arrays",
     "trigger": "Longest/shortest CONTIGUOUS subarray or substring satisfying a constraint",
