@@ -40,8 +40,8 @@ corridor-hops, Merge Intervals → booking-consolidation). 원문은 git 히스�
 
 ## 카테고리 (problems/ 폴더)
 
-arrays-intervals, dynamic-programming, strings-hashing.
-필요시 추가 후보: graphs-trees, two-pointers-sliding-window, heaps-stacks,
+arrays-intervals, dynamic-programming, graphs-trees, strings-hashing.
+필요시 추가 후보: two-pointers-sliding-window, heaps-stacks,
 implementation-simulation, math-bits.
 
 ## 설계 결정

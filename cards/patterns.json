@@ -91,6 +91,13 @@
     "notes": "Near O(1) amortized per operation. BFS/DFS also counts components when the graph is static."
   },
   {
+    "id": "card-topological-sort",
+    "category": "graphs",
+    "trigger": "Recover a valid ordering from pairwise before/after constraints (course prerequisites, build order, alphabet from sorted words)",
+    "pattern": "Model constraints as a directed graph, then Kahn's BFS: repeatedly take indegree-0 nodes",
+    "notes": "Cycle detection is free: if the result has fewer nodes than the graph, the constraints contradict each other. Unconstrained nodes start at indegree 0 and can go anywhere."
+  },
+  {
     "id": "card-gca-time-strategy",
     "category": "strategy",
     "trigger": "70-minute, 4-problem assessment: how do you allocate time?",
