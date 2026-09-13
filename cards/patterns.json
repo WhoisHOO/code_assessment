@@ -107,9 +107,9 @@
   {
     "id": "card-topological-sort",
     "category": "graphs",
-    "trigger": "Recover a valid ordering from pairwise before/after constraints (course prerequisites, build order, alphabet from sorted words)",
+    "trigger": "Pairwise before/after constraints (prerequisites, build order, alphabet from sorted words) - recover an order, or just ask 'can everything finish?'",
     "pattern": "Model constraints as a directed graph, then Kahn's BFS: repeatedly take indegree-0 nodes",
-    "notes": "Cycle detection is free: if the result has fewer nodes than the graph, the constraints contradict each other. Unconstrained nodes start at indegree 0 and can go anywhere."
+    "notes": "Cycle detection is free: fewer processed nodes than the graph has = contradiction. Edge direction gotcha: [a, b] = 'b before a' means edge b->a, indegree[a]++. Unconstrained nodes start at indegree 0."
   },
   {
     "id": "card-gca-time-strategy",
