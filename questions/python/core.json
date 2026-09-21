@@ -169,5 +169,20 @@
     ],
     "answer_index": 0,
     "explanation": "Python lists have no .first()/.last() methods - negative indexing counts from the end (-1 is the last element, -2 the second to last). items[len(items)] is off by one and raises IndexError; the verbose length-based form is items[len(items) - 1]. (Java lists gained getFirst()/getLast() only in Java 21.)"
+  },
+  {
+    "id": "py-012",
+    "language": "python",
+    "topic": "data-structures",
+    "difficulty": "easy",
+    "question": "Which statement REPLACES the second element of the list `items` with 100?",
+    "choices": [
+      "items[1] = 100",
+      "items.insert(1, 100)",
+      "items.set(1, 100)",
+      "items.replace(1, 100)"
+    ],
+    "answer_index": 0,
+    "explanation": "Replacing an element is plain index assignment - lists are mutable and have no set/replace method (set is Java's List.set; replace is a string method). insert(1, 100) is the trap: it does not overwrite, it shifts everything right and grows the list by one."
   }
 ]
