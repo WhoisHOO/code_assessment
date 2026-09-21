@@ -14,8 +14,9 @@
   Daily(Leitner SRS 복습 큐, 신규 하루 10개 캡) / Flashcards(트리거→패턴) /
   Quiz(MCQ) / Problems(타이머 문제풀이 + 오답 4분류 포스트모템) / Stats.
 - **Quiz CLI** (`quiz.cmd` → `python -m quiz`): MCQ 세션, `--review`.
-- 콘텐츠: MCQ 20개(python/java 각 10), 플래시카드 20개(cards/patterns.json),
-  장문 문제 10개(problems/ 아래 카테고리별).
+- 콘텐츠: MCQ 21개(python 11 / java 10), 플래시카드 20개(cards/patterns.json),
+  장문 문제 10개(problems/ 아래 카테고리별). 문법 기초 수준 데이터는
+  problems/가 아니라 MCQ로 넣는다 (py-011 negative indexing이 선례).
 - 테스트 26개 통과, 서버 API 스모크 테스트 완료.
 
 ## 문제 재작성 규칙 (중요 — 사용자가 데이터 줄 때)

@@ -154,5 +154,20 @@
     ],
     "answer_index": 0,
     "explanation": "Strings are immutable, so repeated += can copy the accumulated string each time (O(n^2) worst case). ''.join(parts) allocates once and runs in O(n). sum() explicitly rejects strings for this reason."
+  },
+  {
+    "id": "py-011",
+    "language": "python",
+    "topic": "data-structures",
+    "difficulty": "easy",
+    "question": "Without hardcoding the length, what is the idiomatic way to access the LAST element of a list `items`?",
+    "choices": [
+      "items[-1]",
+      "items.last()",
+      "items[len(items)]",
+      "items.get(-1)"
+    ],
+    "answer_index": 0,
+    "explanation": "Python lists have no .first()/.last() methods - negative indexing counts from the end (-1 is the last element, -2 the second to last). items[len(items)] is off by one and raises IndexError; the verbose length-based form is items[len(items) - 1]. (Java lists gained getFirst()/getLast() only in Java 21.)"
   }
 ]
